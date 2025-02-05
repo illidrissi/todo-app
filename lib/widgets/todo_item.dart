@@ -4,8 +4,8 @@ import '../constants/colors.dart';
 
 class ToDoItem extends StatelessWidget {
   final ToDo todo;
-  final void Function(ToDo) onToDoChanged;
-  final void Function(String) onDeleteItem;
+  final Function(ToDo) onToDoChanged; // Callback for toggling task completion
+  final Function(String) onDeleteItem; // Callback for deleting a task
 
   const ToDoItem({
     super.key,
@@ -48,6 +48,10 @@ class ToDoItem extends StatelessWidget {
             decoration: todo.isDone ? TextDecoration.lineThrough : null,
           ),
         ),
+        subtitle: Text(
+          '${todo.priority} - ${todo.category}',
+          style: TextStyle(fontSize: 14, color: Colors.grey),
+        ),
         trailing: GestureDetector(
           onTap: () {
             onDeleteItem(todo.id!);
@@ -67,7 +71,7 @@ class ToDoItem extends StatelessWidget {
                 ),
               ],
             ),
-            child: Icon(
+            child: const Icon(
               Icons.delete,
               color: Colors.white,
               size: 18,
